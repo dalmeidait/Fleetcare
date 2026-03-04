@@ -1,0 +1,6 @@
+                  id                  |           nome           |        email        |                            senha                             |  perfil   | status |        criado_em        
+--------------------------------------+--------------------------+---------------------+--------------------------------------------------------------+-----------+--------+-------------------------
+ f17e0e7d-17fc-4608-b7f7-71b7c4a6975a | Administrador do Sistema | admin@fleetcare.com | $2b$10$iBV/DCVquaAqNhia.6e3BOunJQenRoIXeyHl1lgaIwwGV6qspf.Ae | ADMIN     | Ativo  | 2026-03-03 18:15:20.744
+ e608074a-38d5-402d-9aa4-d0e1f5181a19 | Teste                    | teste@teste.com     | 123                                                          | ATENDENTE | ATIVO  | 2026-03-04 01:11:14.852
+(2 linhas)
+

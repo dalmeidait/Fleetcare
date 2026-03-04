@@ -1,0 +1,25 @@
+{
+  "name": "fleetcare",
+  "version": "1.0.0",
+  "description": "FleetCare Management System",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.fleetcare.app",
+    "productName": "FleetCare",
+    "win": {
+      "target": "nsis",
+      "icon": "web/favicon.png"
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3",
+    "electron-serve": "^1.3.0"
+  }
+}

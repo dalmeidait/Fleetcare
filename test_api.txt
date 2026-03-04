@@ -1,0 +1,26 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 127.0.0.1:3001...
+* Connected to 127.0.0.1 (127.0.0.1) port 3001
+* using HTTP/1.x
+> GET /api/usuarios HTTP/1.1
+> Host: 127.0.0.1:3001
+> User-Agent: curl/8.15.0
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Credentials: true
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 433
+< ETag: W/"1b1-L6uoZ2CBlaLdfAZUbrFXa+za7fc"
+< Date: Wed, 04 Mar 2026 01:19:06 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< 
+{ [433 bytes data]
+100   433  100   433    0     0  43037      0 --:--:-- --:--:-- --:--:-- 43300
+* Connection #0 to host 127.0.0.1 left intact
+[{"id":"f17e0e7d-17fc-4608-b7f7-71b7c4a6975a","nome":"Administrador do Sistema","email":"admin@fleetcare.com","senha":"$2b$10$iBV/DCVquaAqNhia.6e3BOunJQenRoIXeyHl1lgaIwwGV6qspf.Ae","perfil":"ADMIN","status":"Ativo","criado_em":"2026-03-03T18:15:20.744Z"},{"id":"e608074a-38d5-402d-9aa4-d0e1f5181a19","nome":"Teste","email":"teste@teste.com","senha":"123","perfil":"ATENDENTE","status":"ATIVO","criado_em":"2026-03-04T01:11:14.852Z"}]

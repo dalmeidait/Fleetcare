@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Perfil {
+  ADMIN
+  GESTOR
+  ATENDENTE
+  MECANICO
+  FINANCEIRO
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senha     String
+  perfil    Perfil   @default(ATENDENTE)
+  status    String   @default("ATIVO")
+  criado_em DateTime @default(now())
+
+  ordens_servico OrdemServico[]
+}
+
+model Cliente {
+  id                 String   @id @default(uuid())
+  nome               String
+  cpf_cnpj           String   @unique
+  telefone           String?
+  email              String?  @unique
+  endereco           String?
+  
+  // Política de Descontos
+  totalGasto         Float    @default(0)
+  nivelDesconto      String   @default("Bronze")
+  percentualDesconto Float    @default(0)
+  
+  criado_em          DateTime @default(now())
+
+  veiculos           Veiculo[]
+  ordens_servico     OrdemServico[]
+}
+
+model Veiculo {
+  id         String   @id @default(uuid())
+  placa      String   @unique
+  modelo     String
+  marca      String
+  ano        String?  // <-- Ajustado para aceitar "2012/2012"
+  cliente_id String
+  criado_em  DateTime @default(now())
+
+  cliente        Cliente        @relation(fields: [cliente_id], references: [id])
+  ordens_servico OrdemServico[]
+}
+
+model Servico {
+  id        String   @id @default(uuid())
+  descricao String
+  preco     Float
+  
+  itens_os  ItemServicoOS[]
+}
+
+model Peca {
+  id                 String   @id @default(uuid())
+  descricao          String
+  preco              Float
+  quantidade_estoque Int      @default(0)
+
+  itens_os           ItemPecaOS[]
+}
+
+model OrdemServico {
+  id               String    @id @default(uuid())
+  numero           Int       @unique @default(autoincrement())
+  status           String    @default("ABERTA")
+  descricao        String?
+  relatoMecanico   String?
+  diagnostico      String?
+  valor_total      Float     @default(0)
+  
+  valorMaoDeObra   Float     @default(0)
+  descontoAplicado Float     @default(0)
+  valorFinal       Float     @default(0)
+
+  data_abertura    DateTime  @default(now())
+  data_fechamento  DateTime?
+  cliente_id       String
+  veiculo_id       String
+  responsavel_id   String?
+
+  cliente          Cliente         @relation(fields: [cliente_id], references: [id])
+  veiculo          Veiculo         @relation(fields: [veiculo_id], references: [id])
+  responsavel      Usuario?        @relation(fields: [responsavel_id], references: [id])
+  
+  itens_servico    ItemServicoOS[]
+  itens_peca       ItemPecaOS[]
+  pagamentos       Pagamento[]     // <-- Tabela nova baseada no seu documento
+}
+
+model ItemServicoOS {
+  id               String @id @default(uuid())
+  ordem_servico_id String
+  servico_id       String
+  quantidade       Int    @default(1)
+  valor            Float  @default(0) // <-- Preço congelado no momento da OS
+
+  ordem_servico    OrdemServico @relation(fields: [ordem_servico_id], references: [id], onDelete: Cascade)
+  servico          Servico      @relation(fields: [servico_id], references: [id])
+}
+
+model ItemPecaOS {
+  id               String @id @default(uuid())
+  ordem_servico_id String
+  peca_id          String
+  quantidade       Int    @default(1)
+  valor            Float  @default(0) // <-- Preço congelado no momento da OS
+
+  ordem_servico    OrdemServico @relation(fields: [ordem_servico_id], references: [id], onDelete: Cascade)
+  peca             Peca         @relation(fields: [peca_id], references: [id])
+}
+
+// Entidade adicionada conforme o Diagrama de Classes
+model Pagamento {
+  id               String   @id @default(uuid())
+  ordem_servico_id String
+  forma_pagamento  String
+  valor            Float
+  data_pagamento   DateTime @default(now())
+
+  ordem_servico    OrdemServico @relation(fields: [ordem_servico_id], references: [id], onDelete: Cascade)
+}
