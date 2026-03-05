@@ -1,0 +1,91 @@
+
+> fleetcare-backend@1.0.0 start
+> nest start
+
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +24ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mClientesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVeiculosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mOsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/auth}:[39m[38;5;3m +4ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/login, POST} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mClientesController {/api/clientes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/clientes, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/clientes, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/clientes/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/clientes/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/clientes/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVeiculosController {/api/veiculos}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/veiculos, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/veiculos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/veiculos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/veiculos/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/veiculos/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mOsController {/api/os}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/popular-banco, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/catalogo, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/:id/anexos, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/:id/anexos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/os/:id/anexos/:nomeArquivo, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsuariosController {/api/usuarios}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/usuarios, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/usuarios, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/usuarios/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/usuarios/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/usuarios/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10705  - [39m04/03/2026, 18:21:54 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +55ms[39m
+[31m[Nest] 10705  - [39m04/03/2026, 18:22:15 [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39mPrismaClientKnownRequestError: 
+Invalid `this.prisma.cliente.findMany()` invocation in
+/home/dan/Documentos/fleetcare/fleetcare/backend/src/application/clientes/clientes.service.ts:56:48
+
+  53 }
+  54 
+  55 async findAll() {
+→ 56   const clientes = await this.prisma.cliente.findMany(
+
+    at zr.handleRequestError [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/RequestHandler.ts:237:13[90m)[39m
+    at zr.handleAndLogRequestError [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/RequestHandler.ts:183:12[90m)[39m
+    at zr.request [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/RequestHandler.ts:152:12[90m)[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at async a [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/getPrismaClient.ts:808:24[90m)[39m
+    at async ClientesService.findAll [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39msrc/application/clientes/clientes.service.ts:56:22[90m)[39m
+    at async [90m/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@nestjs/core[24m/router/router-execution-context.js:46:28
+    at async [90m/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@nestjs/core[24m/router/router-proxy.js:9:17 {
+  code: [32m'ECONNREFUSED'[39m,
+  meta: {
+    modelName: [32m'Cliente'[39m
+  },
+  clientVersion: [32m'7.4.2'[39m
+}
+[31m[Nest] 10705  - [39m04/03/2026, 18:24:38 [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39mPrismaClientKnownRequestError: 
+Invalid `this.prisma.cliente.findMany()` invocation in
+/home/dan/Documentos/fleetcare/fleetcare/backend/src/application/clientes/clientes.service.ts:56:48
+
+  53 }
+  54 
+  55 async findAll() {
+→ 56   const clientes = await this.prisma.cliente.findMany(
+
+    at zr.handleRequestError [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/RequestHandler.ts:237:13[90m)[39m
+    at zr.handleAndLogRequestError [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/RequestHandler.ts:183:12[90m)[39m
+    at zr.request [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/RequestHandler.ts:152:12[90m)[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at async a [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@prisma/client[24m/src/runtime/getPrismaClient.ts:808:24[90m)[39m
+    at async ClientesService.findAll [90m(/home/dan/Documentos/fleetcare/fleetcare/backend/[39msrc/application/clientes/clientes.service.ts:56:22[90m)[39m
+    at async [90m/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@nestjs/core[24m/router/router-execution-context.js:46:28
+    at async [90m/home/dan/Documentos/fleetcare/fleetcare/backend/[39mnode_modules/[4m@nestjs/core[24m/router/router-proxy.js:9:17 {
+  code: [32m'ECONNREFUSED'[39m,
+  meta: {
+    modelName: [32m'Cliente'[39m
+  },
+  clientVersion: [32m'7.4.2'[39m
+}

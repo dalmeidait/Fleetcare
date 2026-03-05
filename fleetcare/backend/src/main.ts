@@ -15,5 +15,6 @@ async function bootstrap() {
   });
 
   await app.listen(3001);
+  // Restart triggered to refresh db connection with 127.0.0.1
 }
 bootstrap();

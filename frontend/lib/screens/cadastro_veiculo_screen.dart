@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../services/api_service.dart';
 
 class CadastroVeiculoScreen extends StatefulWidget {
@@ -10,11 +11,33 @@ class CadastroVeiculoScreen extends StatefulWidget {
 }
 
 class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
-  final ApiService _apiService = ApiService();
+  final _apiService = ApiService();
   final _placaController = TextEditingController();
   final _marcaController = TextEditingController();
   final _modeloController = TextEditingController();
   final _anoController = TextEditingController();
+  final _quilometragemController = TextEditingController();
+  final _corController = TextEditingController();
+
+  final _placaFormatter = MaskTextInputFormatter(
+    mask: 'AAA-####', 
+    filter: {"A": RegExp(r'[a-zA-Z]'), "#": RegExp(r'[0-9a-zA-Z]')},
+    type: MaskAutoCompletionType.lazy
+  );
+
+  final _anoFormatter = MaskTextInputFormatter(
+    mask: '####/####', 
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy
+  );
+
+  bool _avariasPrevias = false;
+  bool _pertencesValor = false;
+  bool _luzesPainel = false;
+
+  final _avariasDescController = TextEditingController();
+  final _pertencesDescController = TextEditingController();
+  final _luzesDescController = TextEditingController();
 
   String? _clienteIdSelecionado;
   List<dynamic> _clientes = [];
@@ -31,6 +54,17 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
       _marcaController.text = widget.veiculoParaEditar!['marca'] ?? '';
       _modeloController.text = widget.veiculoParaEditar!['modelo'] ?? '';
       _anoController.text = widget.veiculoParaEditar!['ano']?.toString() ?? '';
+      _corController.text = widget.veiculoParaEditar!['cor'] ?? '';
+      _quilometragemController.text = widget.veiculoParaEditar!['quilometragem']?.toString() ?? '';
+
+      _avariasPrevias = widget.veiculoParaEditar!['avarias_previas'] == true;
+      _avariasDescController.text = widget.veiculoParaEditar!['avarias_previas_desc'] ?? '';
+
+      _pertencesValor = widget.veiculoParaEditar!['pertences_valor'] == true;
+      _pertencesDescController.text = widget.veiculoParaEditar!['pertences_valor_desc'] ?? '';
+
+      _luzesPainel = widget.veiculoParaEditar!['luzes_painel'] == true;
+      _luzesDescController.text = widget.veiculoParaEditar!['luzes_painel_desc'] ?? '';
 
       // A MÁGICA: Pega o ID com ou sem underline!
       _clienteIdSelecionado =
@@ -88,6 +122,14 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
       'marca': _marcaController.text,
       'modelo': _modeloController.text,
       'ano': anoFormatado,
+      'cor': _corController.text,
+      'quilometragem': _quilometragemController.text,
+      'avarias_previas': _avariasPrevias,
+      'avarias_previas_desc': _avariasDescController.text,
+      'pertences_valor': _pertencesValor,
+      'pertences_valor_desc': _pertencesDescController.text,
+      'luzes_painel': _luzesPainel,
+      'luzes_painel_desc': _luzesDescController.text,
       'clienteId': _clienteIdSelecionado,
     };
 
@@ -179,6 +221,12 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
                         const SizedBox(height: 16),
                         TextField(
                           controller: _placaController,
+                          inputFormatters: [_placaFormatter],
+                          onChanged: (value) {
+                            if (value.length > 8 && _placaFormatter.getMask() != 'AAA-####') {
+                              _placaFormatter.updateMask(mask: 'AAA-####');
+                            }
+                          },
                           decoration: _construirDecoracao(
                             'Placa',
                             Icons.pin_outlined,
@@ -210,14 +258,106 @@ class _CadastroVeiculoScreenState extends State<CadastroVeiculoScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        TextField(
-                          controller: _anoController,
-                          decoration: _construirDecoracao(
-                            'Ano',
-                            Icons.calendar_today_outlined,
-                          ),
-                          keyboardType: TextInputType.number,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _anoController,
+                                inputFormatters: [_anoFormatter],
+                                decoration: _construirDecoracao(
+                                  'Ano',
+                                  Icons.calendar_today_outlined,
+                                ),
+                                keyboardType: TextInputType.number,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: TextField(
+                                controller: _quilometragemController,
+                                decoration: _construirDecoracao(
+                                  'Quilometragem',
+                                  Icons.speed,
+                                ),
+                                keyboardType: TextInputType.number,
+                              ),
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: _corController,
+                          decoration: _construirDecoracao(
+                            'Cor',
+                            Icons.color_lens_outlined,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        const Text(
+                          'Checklist de Entrada',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A)),
+                        ),
+                        const Divider(height: 24),
+                        
+                        // Avarias Previas
+                        SwitchListTile(
+                          title: const Text('Possui avarias prévias na lataria/pintura?'),
+                          value: _avariasPrevias,
+                          activeColor: const Color(0xFFFF6D00),
+                          onChanged: (bool value) {
+                            setState(() {
+                              _avariasPrevias = value;
+                            });
+                          },
+                        ),
+                        if (_avariasPrevias)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                            child: TextField(
+                              controller: _avariasDescController,
+                              decoration: _construirDecoracao('Descreva as avarias', Icons.description),
+                            ),
+                          ),
+                          
+                        // Pertences de Valor
+                        SwitchListTile(
+                          title: const Text('Há pertences de valor no interior do veículo?'),
+                          value: _pertencesValor,
+                          activeColor: const Color(0xFFFF6D00),
+                          onChanged: (bool value) {
+                            setState(() {
+                              _pertencesValor = value;
+                            });
+                          },
+                        ),
+                        if (_pertencesValor)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                            child: TextField(
+                              controller: _pertencesDescController,
+                              decoration: _construirDecoracao('Quais pertences?', Icons.description),
+                            ),
+                          ),
+
+                        // Luzes de Alerta
+                        SwitchListTile(
+                          title: const Text('Há luzes de alerta acesas no painel?'),
+                          value: _luzesPainel,
+                          activeColor: const Color(0xFFFF6D00),
+                          onChanged: (bool value) {
+                            setState(() {
+                              _luzesPainel = value;
+                            });
+                          },
+                        ),
+                        if (_luzesPainel)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                            child: TextField(
+                              controller: _luzesDescController,
+                              decoration: _construirDecoracao('Quais luzes?', Icons.description),
+                            ),
+                          ),
                         const SizedBox(height: 40),
                         SizedBox(
                           width: double.infinity,

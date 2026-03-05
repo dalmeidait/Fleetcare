@@ -3,7 +3,7 @@ import { PrismaService } from '../../infrastructure/prisma.service';
 
 @Injectable()
 export class VeiculosService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: any) {
     // 🕵️ O ESPIÃO: Vai nos dizer se os dados chegaram aqui ou se o Flutter travou antes
@@ -20,14 +20,22 @@ export class VeiculosService {
         throw new HttpException('Placa duplicada', HttpStatus.CONFLICT);
       }
 
-      const veiculo = await this.prisma.veiculo.create({ 
+      const veiculo = await this.prisma.veiculo.create({
         data: {
           placa: data.placa,
           marca: data.marca,
           modelo: data.modelo,
           ano: data.ano ? String(data.ano) : null, // Aceita "2010/2010" tranquilamente
+          cor: data.cor || null,
+          quilometragem: data.quilometragem ? parseInt(data.quilometragem, 10) : null,
+          avarias_previas: data.avarias_previas ?? false,
+          avarias_previas_desc: data.avarias_previas_desc || null,
+          pertences_valor: data.pertences_valor ?? false,
+          pertences_valor_desc: data.pertences_valor_desc || null,
+          luzes_painel: data.luzes_painel ?? false,
+          luzes_painel_desc: data.luzes_painel_desc || null,
           cliente_id: clienteId,
-        } 
+        }
       });
 
       console.log("✅ VEÍCULO GRAVADO COM SUCESSO! ID:", veiculo.id);
@@ -59,7 +67,15 @@ export class VeiculosService {
           placa: data.placa,
           marca: data.marca,
           modelo: data.modelo,
-          ano: data.ano ? String(data.ano) : null, 
+          ano: data.ano ? String(data.ano) : null,
+          cor: data.cor !== undefined ? data.cor : undefined,
+          quilometragem: data.quilometragem ? parseInt(data.quilometragem, 10) : null,
+          avarias_previas: data.avarias_previas !== undefined ? data.avarias_previas : undefined,
+          avarias_previas_desc: data.avarias_previas_desc !== undefined ? data.avarias_previas_desc : undefined,
+          pertences_valor: data.pertences_valor !== undefined ? data.pertences_valor : undefined,
+          pertences_valor_desc: data.pertences_valor_desc !== undefined ? data.pertences_valor_desc : undefined,
+          luzes_painel: data.luzes_painel !== undefined ? data.luzes_painel : undefined,
+          luzes_painel_desc: data.luzes_painel_desc !== undefined ? data.luzes_painel_desc : undefined,
           ...(clienteId && { cliente_id: clienteId }),
         }
       });

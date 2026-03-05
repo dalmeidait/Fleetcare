@@ -15,11 +15,9 @@ class ApiService {
     final prefs = await SharedPreferences.getInstance();
     String? urlSalva = prefs.getString('api_base_url');
     
-    // Agora ele só muda a URL se realmente tiver uma salva. 
-    // Se não tiver, ele mantém o Ngrok ali de cima!
-    if (urlSalva != null && urlSalva.isNotEmpty) {
-      baseUrl = urlSalva;
-    }
+    // if (urlSalva != null && urlSalva.isNotEmpty) {
+    //   baseUrl = urlSalva;
+    // }
   }
 
   Future<void> setBaseUrl(String url) async {
@@ -34,8 +32,6 @@ class ApiService {
     return {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
-      'ngrok-skip-browser-warning': 'true',
-      'Bypass-Tunnel-Reminder': 'true',
     };
   }
 
@@ -58,8 +54,6 @@ class ApiService {
         Uri.parse('$baseUrl/auth/login'),
         headers: {
           'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true',
-          'Bypass-Tunnel-Reminder': 'true',
         },
         body: json.encode({'email': email, 'senha': senha}),
       );
@@ -234,8 +228,6 @@ class ApiService {
       final headers = await _getHeaders();
       request.headers.addAll({
         'Authorization': headers['Authorization'] ?? '',
-        'ngrok-skip-browser-warning': 'true',
-        'Bypass-Tunnel-Reminder': 'true',
       });
 
       for (var arquivo in arquivosLocais) {

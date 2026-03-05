@@ -3,7 +3,7 @@ import { PrismaService } from '../../infrastructure/prisma.service';
 
 @Injectable()
 export class ClientesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(data: any) {
     // 1. Imprime os dados exatos que o Flutter enviou
@@ -36,6 +36,13 @@ export class ClientesService {
           cpf_cnpj: cpfCnpj,
           telefone: data.telefone || null,
           email: data.email && data.email.trim() !== '' ? data.email : null,
+          cep: data.cep || null,
+          bairro: data.bairro || null,
+          rua: data.rua || null,
+          numero: data.numero || null,
+          complemento: data.complemento || null,
+          cidade: data.cidade || null,
+          estado: data.estado || null,
         }
       });
       console.log("✅ CLIENTE GRAVADO COM SUCESSO! ID:", cliente.id);
@@ -65,6 +72,13 @@ export class ClientesService {
         ...(cpfCnpj && { cpf_cnpj: cpfCnpj }),
         telefone: data.telefone || null,
         email: data.email && data.email.trim() !== '' ? data.email : null,
+        cep: data.cep || null,
+        bairro: data.bairro || null,
+        rua: data.rua || null,
+        numero: data.numero || null,
+        complemento: data.complemento || null,
+        cidade: data.cidade || null,
+        estado: data.estado || null,
       }
     });
     return this.mapToFlutter(atualizado);

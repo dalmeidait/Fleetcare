@@ -483,6 +483,7 @@ class _GerenciarOSScreenState extends State<GerenciarOSScreen> {
                 pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
                   pw.Row(children: [pw.Text('Marca: ', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)), pw.Text(veiculoMarca)]),
                   pw.Row(children: [pw.Text('Modelo/Ano: ', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)), pw.Text(veiculoModelo)]),
+                  pw.Row(children: [pw.Text('Cor: ', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)), pw.Text(veiculo['cor'] ?? 'Nao informado')]),
                 ]),
                 pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
                   pw.Row(children: [pw.Text('Placa: ', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)), pw.Text(veiculoPlaca)]),
@@ -490,6 +491,16 @@ class _GerenciarOSScreenState extends State<GerenciarOSScreen> {
                 ]),
               ]
             )),
+
+            if (veiculo['avarias_previas'] == true || veiculo['pertences_valor'] == true || veiculo['luzes_painel'] == true)
+              sectionBox('3.1 CHECKLIST DE ENTRADA DO VEICULO', pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    if (veiculo['avarias_previas'] == true) pw.Text('Avarias: ${veiculo['avarias_previas_desc'] ?? 'Nao informado'}', style: const pw.TextStyle(fontSize: 10)),
+                    if (veiculo['pertences_valor'] == true) pw.Text('Pertences de Valor: ${veiculo['pertences_valor_desc'] ?? 'Nao informado'}', style: const pw.TextStyle(fontSize: 10)),
+                    if (veiculo['luzes_painel'] == true) pw.Text('Luzes Painel: ${veiculo['luzes_painel_desc'] ?? 'Nao informado'}', style: const pw.TextStyle(fontSize: 10)),
+                  ]
+              )),
 
             sectionBox('4. SINTOMAS / RELATO DO CLIENTE', pw.Text(widget.osDados['relato_limpo'] ?? 'Nao informado.')),
 
@@ -713,6 +724,38 @@ class _GerenciarOSScreenState extends State<GerenciarOSScreen> {
           ),
         ),
         const SizedBox(height: 16),
+        if (veiculo['avarias_previas'] == true || veiculo['pertences_valor'] == true || veiculo['luzes_painel'] == true) ...[
+          Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Checklist do Veículo', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E3A8A))),
+                  const Divider(height: 24),
+                  if (veiculo['avarias_previas'] == true)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text('⚠️ Avarias Prévias: ${veiculo['avarias_previas_desc'] ?? 'Sem descrição'}', style: const TextStyle(fontSize: 15, color: Colors.redAccent)),
+                    ),
+                  if (veiculo['pertences_valor'] == true)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text('💼 Pertences de Valor: ${veiculo['pertences_valor_desc'] ?? 'Sem descrição'}', style: const TextStyle(fontSize: 15, color: Colors.orange)),
+                    ),
+                  if (veiculo['luzes_painel'] == true)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text('🚨 Luzes de Alerta no Painel: ${veiculo['luzes_painel_desc'] ?? 'Sem descrição'}', style: const TextStyle(fontSize: 15, color: Colors.deepOrange)),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
         Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

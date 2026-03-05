@@ -102,4 +102,9 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
+  web:
+    generate: true
+    image_path: "assets/carro.png"
+    background_color: "#1A237E"
+    theme_color: "#1A237E"
   image_path: "assets/carro.png"

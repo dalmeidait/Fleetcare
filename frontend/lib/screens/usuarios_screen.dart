@@ -14,7 +14,7 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
 
   List<Map<String, dynamic>> _usuarios = [];
 
-  final List<String> _perfis = ['Administrador', 'Gestor', 'Atendente', 'Mecânico', 'Financeiro'];
+  final List<String> _perfis = ['ADMIN', 'GESTOR', 'ATENDENTE', 'MECANICO', 'FINANCEIRO'];
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
   void _alternarStatusUsuario(int index) async {
     final usuario = _usuarios[index];
     final id = usuario['id'].toString();
-    final novoStatus = usuario['status'] == 'Ativo' ? 'Inativo' : 'Ativo';
+    final novoStatus = (usuario['status']?.toString().toUpperCase() == 'ATIVO') ? 'INATIVO' : 'ATIVO';
 
     // Salva na memória
     await _apiService.atualizarUsuario(id, {'status': novoStatus});
@@ -49,8 +49,8 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${usuario['nome']} foi ${novoStatus == 'Inativo' ? 'inativado' : 'reativado'}.'),
-        backgroundColor: novoStatus == 'Inativo' ? Colors.orange.shade800 : Colors.green
+        content: Text('${usuario['nome']} foi ${novoStatus == 'INATIVO' ? 'inativado' : 'reativado'}.'),
+        backgroundColor: novoStatus == 'INATIVO' ? Colors.orange.shade800 : Colors.green
       )
     );
   }
@@ -80,7 +80,7 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
     final nomeController = TextEditingController();
     final emailController = TextEditingController();
     final senhaController = TextEditingController();
-    String perfilSelecionado = 'Atendente';
+    String perfilSelecionado = 'ATENDENTE';
     bool salvando = false;
 
     showDialog(
@@ -123,7 +123,7 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
                 onPressed: salvando ? null : () async {
                   setStateModal(() => salvando = true);
 
-                  final dados = {'nome': nomeController.text, 'email': emailController.text, 'senha': senhaController.text, 'perfil': perfilSelecionado, 'status': 'Ativo'};
+                  final dados = {'nome': nomeController.text, 'email': emailController.text, 'senha': senhaController.text, 'perfil': perfilSelecionado, 'status': 'ATIVO'};
                   
                   // Salva na memória
                   final sucesso = await _apiService.criarUsuario(dados);
@@ -153,7 +153,7 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
     final nomeController = TextEditingController(text: usuario['nome']);
     final emailController = TextEditingController(text: usuario['email']);
     final senhaController = TextEditingController(); 
-    String perfilSelecionado = usuario['perfil'];
+    String perfilSelecionado = _perfis.contains(usuario['perfil']) ? usuario['perfil'] : 'ATENDENTE';
     bool salvando = false;
 
     showDialog(
@@ -223,11 +223,11 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
 
   Color _pegarCorDoPerfil(String perfil) {
     switch (perfil) {
-      case 'Administrador': return Colors.purple;
-      case 'Gestor': return Colors.indigo;
-      case 'Atendente': return Colors.blue;
-      case 'Mecânico': return Colors.orange;
-      case 'Financeiro': return Colors.green;
+      case 'ADMIN': return Colors.purple;
+      case 'GESTOR': return Colors.indigo;
+      case 'ATENDENTE': return Colors.blue;
+      case 'MECANICO': return Colors.orange;
+      case 'FINANCEIRO': return Colors.green;
       default: return Colors.grey;
     }
   }
@@ -248,7 +248,7 @@ class _UsuariosScreenState extends State<UsuariosScreen> {
                 itemBuilder: (context, index) {
                   final user = _usuarios[index];
                   final corPerfil = _pegarCorDoPerfil(user['perfil']);
-                  final isAtivo = user['status'] == 'Ativo';
+                  final isAtivo = user['status']?.toString().toUpperCase() == 'ATIVO';
 
                   return Card(
                     elevation: isAtivo ? 2 : 0,

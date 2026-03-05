@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE         COMMAND                  CREATED        STATUS         PORTS                                         NAMES
+fe9d3c657cd4   postgres:15   "docker-entrypoint.s…"   22 hours ago   Up 2 minutes   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   fleetcare_db

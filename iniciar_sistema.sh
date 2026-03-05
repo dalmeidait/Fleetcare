@@ -19,12 +19,12 @@ echo "Aguardando o servidor subir na porta 3000..."
 sleep 5
 echo ""
 
-echo "[3/3] Criando Túnel Público (Internet)..."
-echo "O link gerado abaixo é o que você usará no aplicativo Android!"
+echo "O servidor Backend está rodando localmente!"
 echo "Pressione CTRL+C para desligar o sistema inteiro a qualquer momento."
 echo "--------------------------------------------------"
-npx localtunnel --port 3001
-echo "--------------------------------------------------"
+
+# Wait indefinitely until interrupted
+wait $BACKEND_PID
 
 echo "Desligando o servidor backend em background..."
 kill $BACKEND_PID

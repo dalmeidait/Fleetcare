@@ -32,7 +32,15 @@ model Cliente {
   cpf_cnpj           String   @unique
   telefone           String?
   email              String?  @unique
-  endereco           String?
+  
+  // Endereço
+  cep                String?
+  bairro             String?
+  rua                String?
+  numero             String?
+  complemento        String?
+  cidade             String?
+  estado             String?
   
   // Política de Descontos
   totalGasto         Float    @default(0)
@@ -46,13 +54,24 @@ model Cliente {
 }
 
 model Veiculo {
-  id         String   @id @default(uuid())
-  placa      String   @unique
-  modelo     String
-  marca      String
-  ano        String?  // <-- Ajustado para aceitar "2012/2012"
-  cliente_id String
-  criado_em  DateTime @default(now())
+  id             String   @id @default(uuid())
+  placa          String   @unique
+  modelo         String
+  marca          String
+  ano            String?  // <-- Ajustado para aceitar "2012/2012"
+  cor            String?
+  quilometragem  Int?
+  
+  // Checklist
+  avarias_previas      Boolean? @default(false)
+  avarias_previas_desc String?
+  pertences_valor      Boolean? @default(false)
+  pertences_valor_desc String?
+  luzes_painel         Boolean? @default(false)
+  luzes_painel_desc    String?
+
+  cliente_id     String
+  criado_em      DateTime @default(now())
 
   cliente        Cliente        @relation(fields: [cliente_id], references: [id])
   ordens_servico OrdemServico[]
